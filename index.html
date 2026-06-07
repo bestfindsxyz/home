@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BestFinds.xyz — Curated Products Worth Buying</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0f0f10;
+  --bg2:      #18181b;
+  --bg3:      #232328;
+  --card:     #1c1c20;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --white:    #f5f3ef;
+  --muted:    #9a9793;
+  --accent:   #e8a44a;
+  --accent2:  #d48c2a;
+  --green:    #4caf7d;
+  --amber:    #f0b429;
+  --cyan:     #5ab4e5;
+  --rose:     #e0635a;
+  --text:     #d8d5d0;
+  --f-head:   'Playfair Display', serif;
+  --f-body:   'DM Sans', sans-serif;
+  --r:        10px;
+  --r2:       16px;
+  --shadow:   0 4px 24px rgba(0,0,0,0.45);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ── ACTIVITY BUBBLES ── */
+#bubbles {
+  position: fixed; bottom: 24px; left: 24px; z-index: 900;
+  display: flex; flex-direction: column-reverse; gap: 10px;
+  pointer-events: none; max-width: 300px;
+}
+.bubble {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 14px; padding: 11px 15px;
+  display: flex; align-items: center; gap: 11px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  animation: bIn 0.45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.bubble.out { animation: bOut 0.35s ease forwards; }
+.b-av {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; background: var(--bg3);
+}
+.b-name { font-size: 13px; font-weight: 500; color: var(--white); line-height: 1.3; }
+.b-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+@keyframes bIn  { from{opacity:0;transform:translateX(-20px) scale(0.94)} to{opacity:1;transform:none} }
+@keyframes bOut { from{opacity:1} to{opacity:0;transform:translateX(-16px)} }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 800;
+  padding: 14px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(15,15,16,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--f-head); font-size: 18px; font-weight: 700;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo img { height: 36px; width: 36px; object-fit: contain; border-radius: 6px; }
+.nav-logo .logo-text { color: var(--white); }
+.nav-logo .logo-dot { color: var(--accent); }
+.nav-cats { display: flex; gap: 4px; list-style: none; }
+.nav-cats a {
+  text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500;
+  padding: 6px 14px; border-radius: 100px; border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.nav-cats a:hover { color: var(--accent); border-color: var(--border2); background: var(--bg3); }
+.nav-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 100px; padding: 8px 18px;
+  font-size: 14px; color: var(--muted); cursor: pointer;
+}
+
+/* ── HERO ── */
+.hero-strip {
+  margin-top: 65px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: calc(100vh - 65px);
+  max-height: 520px;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-inner {
+  background: linear-gradient(135deg, #1a1400 0%, #0f0f10 100%);
+  position: relative; z-index: 1;
+  padding: 48px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-inner::before {
+  content: '';
+  position: absolute; top: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232,164,74,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-img-panel { position: relative; overflow: hidden; }
+.hero-img-panel img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.hero-img-panel::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--bg) 0%, transparent 30%),
+              linear-gradient(to top, rgba(15,15,16,0.5) 0%, transparent 40%);
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(232,164,74,0.12); border: 1px solid rgba(232,164,74,0.3);
+  color: var(--accent); border-radius: 100px;
+  padding: 5px 14px; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 18px;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--accent); border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
+.hero-h1 {
+  font-family: var(--f-head);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--white); margin-bottom: 18px;
+  letter-spacing: -0.5px;
+}
+.hero-h1 em { color: var(--accent); font-style: italic; }
+.hero-sub {
+  font-size: 16px; color: var(--muted);
+  max-width: 420px; margin-bottom: 28px; line-height: 1.65;
+}
+.cat-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.cat-pill {
+  text-decoration: none; color: var(--text);
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 500;
+  display: flex; align-items: center; gap: 7px;
+  transition: all 0.2s;
+}
+.cat-pill:hover { color: var(--accent); border-color: rgba(232,164,74,0.4); }
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+/* ── MARQUEE ── */
+.mq-wrap {
+  overflow: hidden;
+  background: var(--accent); padding: 11px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.mq-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+.mq-track span {
+  display: inline-block; padding: 0 32px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  color: #0f0f10; text-transform: uppercase;
+}
+.mq-track span.accent-tag { color: rgba(0,0,0,0.55); }
+@keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTIONS ── */
+.section { padding: 64px 48px; max-width: 1400px; margin: 0 auto; }
+.sec-hd { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+.sec-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+}
+.sec-title {
+  font-family: var(--f-head);
+  font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+  font-weight: 700; color: var(--white); letter-spacing: -0.3px;
+}
+.sec-link {
+  text-decoration: none; color: var(--accent);
+  font-size: 14px; font-weight: 600;
+  border: 1px solid rgba(232,164,74,0.35);
+  padding: 8px 20px; border-radius: 100px;
+  transition: all 0.2s; white-space: nowrap;
+}
+.sec-link:hover { background: rgba(232,164,74,0.1); }
+
+/* ── FEATURED CARD ── */
+.feat-card {
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.feat-img { position: relative; overflow: hidden; }
+.feat-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block; aspect-ratio: 1;
+  transition: transform 0.5s ease;
+}
+.feat-card:hover .feat-img img { transform: scale(1.03); }
+.feat-body {
+  padding: 40px 44px;
+  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+}
+.feat-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(232,164,74,0.12); border: 1px solid rgba(232,164,74,0.3);
+  color: var(--accent); border-radius: 100px;
+  padding: 4px 14px; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase; align-self: flex-start;
+}
+.feat-title {
+  font-family: var(--f-head);
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  font-weight: 700; color: var(--white); line-height: 1.25;
+}
+.feat-desc { font-size: 15px; color: var(--muted); line-height: 1.6; }
+.feat-features { display: flex; flex-direction: column; gap: 8px; }
+.feat-feature {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--text);
+}
+.feat-feature::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+}
+.feat-price { display: flex; align-items: center; gap: 10px; }
+.pnow { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.pwas { font-size: 14px; color: var(--muted); text-decoration: line-through; }
+.psave {
+  background: rgba(76,175,125,0.15); color: var(--green);
+  border: 1px solid rgba(76,175,125,0.25);
+  border-radius: 100px; padding: 2px 10px; font-size: 12px; font-weight: 600;
+}
+.feat-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; background: var(--accent); color: #0f0f10;
+  font-size: 15px; font-weight: 700;
+  padding: 14px 28px; border-radius: 100px;
+  transition: all 0.2s; align-self: flex-start;
+}
+.feat-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+/* ── PRODUCT GRIDS ── */
+.grid-5 { display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+/* ── PRODUCT CARD ── */
+.pcard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: var(--text);
+  transition: all 0.25s; position: relative;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+.pcard:hover {
+  border-color: rgba(232,164,74,0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+}
+.pcard-img {
+  width: 100%; aspect-ratio: 1;
+  overflow: hidden; background: var(--bg3);
+  flex-shrink: 0;
+}
+.pcard-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block; transition: transform 0.4s ease;
+}
+.pcard:hover .pcard-img img { transform: scale(1.04); }
+.contain-img .pcard-img img { object-fit: contain; padding: 16px; }
+.pcard-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+}
+.badge-hot  { background: rgba(224,99,90,0.85); color: #fff; }
+.badge-new  { background: rgba(90,180,229,0.85); color: #fff; }
+.badge-sale { background: rgba(76,175,125,0.85); color: #fff; }
+.badge-top  { background: rgba(232,164,74,0.9);  color: #0f0f10; }
+.pcard-timer {
+  background: rgba(15,15,16,0.75);
+  padding: 6px 14px; font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; gap: 6px; color: var(--amber);
+}
+.pcard-body { padding: 16px 16px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.pcard-cat { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--accent); }
+.pcard-name { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.35; }
+.pcard-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; flex: 1; }
+.pcard-stars { font-size: 12px; color: var(--muted); }
+.stars-y { color: var(--amber); }
+.pcard-price { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
+.p-now { font-size: 1rem; font-weight: 700; color: var(--accent); }
+.p-was { font-size: 12px; color: var(--muted); text-decoration: line-through; }
+.p-save {
+  font-size: 11px; font-weight: 600; color: var(--green);
+  background: rgba(76,175,125,0.12); border: 1px solid rgba(76,175,125,0.2);
+  border-radius: 100px; padding: 1px 8px;
+}
+.pcard-btn {
+  margin: 10px 16px 16px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r); padding: 10px 0;
+  text-align: center; font-size: 13px; font-weight: 600; color: var(--white);
+  cursor: pointer; transition: all 0.2s;
+}
+.pcard:hover .pcard-btn { background: var(--accent); color: #0f0f10; border-color: var(--accent); }
+.pcard-viewed {
+  padding: 6px 14px 10px;
+  font-size: 11px; color: var(--muted);
+  display: flex; align-items: center; gap: 5px;
+}
+.vdot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); max-width: 1400px; margin: 0 auto; }
+
+/* ── TRUST BAR ── */
+.trust {
+  background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 28px 48px;
+}
+.trust-row {
+  display: flex; gap: 32px; align-items: center;
+  justify-content: center; flex-wrap: wrap;
+  max-width: 1200px; margin: 0 auto;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 12px;
+}
+.trust-icon { font-size: 22px; }
+.trust-text { display: flex; flex-direction: column; }
+.trust-text strong { font-size: 13px; font-weight: 600; color: var(--white); }
+.trust-text span { font-size: 12px; color: var(--muted); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.on { opacity: 1; transform: none; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 56px 48px 32px;
+}
+.footer-top {
+  display: flex; gap: 48px; align-items: flex-start;
+  max-width: 1200px; margin: 0 auto 40px;
+}
+.footer-brand { flex: 1; }
+.footer-logo {
+  font-family: var(--f-head);
+  font-size: 20px; font-weight: 700; color: var(--white);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.footer-logo img { height: 36px; width: 36px; object-fit: contain; border-radius: 6px; }
+.footer-logo span { color: var(--accent); }
+.footer-tagline { font-size: 14px; color: var(--muted); max-width: 280px; line-height: 1.6; }
+.footer-links {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.footer-links a {
+  text-decoration: none; color: var(--muted); font-size: 14px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 24px; max-width: 1200px; margin: 0 auto;
+}
+.footer-disc { font-size: 12px; color: var(--muted); margin-bottom: 8px; line-height: 1.6; }
+.footer-copy { font-size: 12px; color: var(--muted); }
+
+/* ── CAT HEADINGS ── */
+.cat-kitchen .sec-title { color: #fdba74; }
+.cat-home .sec-title    { color: var(--white); }
+.cat-gadget .sec-title  { color: #93c5fd; }
+.cat-wellness .sec-title{ color: #86efac; }
+.cat-lighting .sec-title{ color: #fde68a; }
+</style>
+</head>
+<body>
+
+<div id="bubbles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="data:image/jpeg;base64,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" alt="BestFinds.xyz" />
+    <span class="logo-text">Best<span class="logo-dot">Finds</span><span style="color:var(--muted);font-size:14px">.xyz</span></span>
+  </a>
+  <ul class="nav-cats">
+    <li><a href="#kitchen">🍳 Kitchen</a></li>
+    <li><a href="#home">🏠 Home</a></li>
+    <li><a href="#gadgets">⚡ Gadgets</a></li>
+    <li><a href="#wellness">🌿 Wellness</a></li>
+    <li><a href="#lighting">💡 Lighting</a></li>
+  </ul>
+  <div class="nav-search">🔍 Search products…</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="hero-inner">
+    <div class="hero-badge">Updated Daily · Hand-Picked</div>
+    <h1 class="hero-h1">The Best Products,<br><em>Every Single Day.</em></h1>
+    <p class="hero-sub">From smart home appliances to next-gen storage, wellness gear to gaming lights — curated by enthusiasts, not algorithms.</p>
+    <div class="cat-pills">
+      <a href="#kitchen" class="cat-pill"><span class="dot" style="background:#f97316"></span> Kitchen</a>
+      <a href="#home" class="cat-pill"><span class="dot" style="background:#e8a44a"></span> Home</a>
+      <a href="#gadgets" class="cat-pill"><span class="dot" style="background:#5ab4e5"></span> Gadgets</a>
+      <a href="#wellness" class="cat-pill"><span class="dot" style="background:#4caf7d"></span> Wellness</a>
+      <a href="#lighting" class="cat-pill"><span class="dot" style="background:#f0b429"></span> Lighting</a>
+    </div>
+  </div>
+  <div class="hero-img-panel">
+    <img src="https://i.pinimg.com/1200x/41/a0/08/41a008564e0742138a19c03026fd1037.jpg" alt="Top Daily Products" />
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="accent-tag">Today's Picks</span><span>Hand-Curated</span><span>Free Worldwide Shipping</span><span class="accent-tag">Limited Deals</span><span>Real Reviews</span><span>Affiliate Trusted</span><span>Smart Home</span><span>Next-Gen Storage</span><span>Air Wellness</span><span class="accent-tag">Today's Picks</span><span>Hand-Curated</span><span>Free Worldwide Shipping</span><span class="accent-tag">Limited Deals</span><span>Real Reviews</span><span>Affiliate Trusted</span><span>Smart Home</span><span>Next-Gen Storage</span><span>Air Wellness</span>
+  </div>
+</div>
+
+<!-- ══ KITCHEN ══ -->
+<section class="section cat-kitchen" id="kitchen">
+  <div class="sec-hd reveal">
+    <div>
+      <div class="sec-label">🍳 Kitchen Appliances · Headliner</div>
+      <h2 class="sec-title">Smart Cooking, Elevated.</h2>
+    </div>
+    <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="sec-link">Shop All →</a>
+  </div>
+
+  <div class="feat-card reveal" style="margin-bottom:24px">
+    <div class="feat-img">
+      <img src="https://uc92df5649c824d6ee8f6dad7c37.previews.dropboxusercontent.com/p/thumb/ADDg2isk7MXeV7d-Og_0-Twbn3DWxSkXgvS_DvhyfuNz_R64QWNMAfoQFFDX6Bg93nxbvd_09QzvwcrRe3N7zhwUq86rcG-xYf_UVWogjU2MBfXpUVm3yS3bkvNeJk2dHPimmIRyCLgJqXoBgwhMavh9wjwEc9nNN-nGu9JK2PwkDuncFtPIPtym52kBSJRBMozMNqzktJ3YhCa9nZbX_-wqq95wk2tYW-lcLYmoMqdlOUoacudlNr42LlD_oKLXHvPxyjT4LSYoS8Qvd1PuGC5meGHrSIjI-I5Gh7plCmDiDK9f9mDQS7g73d23I43en-GZoDx2VzBUcNE2hIf9U-Bryw_I0ykYgnptSGzOxI-38zyAl-gmxw51_ZT_hGB22kQ27PCT8o6ab61CiyUdu1aVb-tCSadEX8J4NVTGI1yi4Q/p.png" alt="Livwell Touch IQ Indoor/Outdoor Air Fryer Pizza Oven" />
+    </div>
+    <div class="feat-body">
+      <div class="feat-badge" style="background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.3);color:#f97316;">🔥 Headliner Pick</div>
+      <div class="feat-title">Livwell Touch IQ<br>Indoor/Outdoor Air Fryer Pizza Oven</div>
+      <div class="feat-desc">The ultimate countertop appliance — air fry, roast, bake, and make pizza indoors or outdoors with smart Touch IQ precision control.</div>
+      <div class="feat-features">
+        <div class="feat-feature">Smart Touch IQ digital display &amp; presets</div>
+        <div class="feat-feature">Works indoors &amp; outdoors — versatile powerhouse</div>
+        <div class="feat-feature">4.9 ★ — 25 verified reviews</div>
+      </div>
+      <div class="feat-price">
+        <span class="pnow">$399.99</span>
+      </div>
+      <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="feat-cta">🛒 Get This Deal →</a>
+    </div>
+  </div>
+
+  <div class="grid-5">
+    <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="pcard reveal">
+      <span class="pcard-badge badge-hot">HOT</span>
+      <div class="pcard-img">
+        <img src="https://ucbeaab69ac27cc52986f81fcd3a.previews.dropboxusercontent.com/p/thumb/ADDaMcTYtWA6ncrgGYAhhfl4Qj9kl27yHGP07OCfnzXOY4gdGHF5NQSdy1cmEMitxednA-55adMNmsfrwjkKIqHsNTuF7ywv6l1vfjMyoFb2-hoAEppTt_JTCbwbXddYybSdtZfPSEOseS9sv6vq8bVHQJmfHYc5X0-Lz8JdCuF5SnDVDkR5fPIW1QbfDypcI5yvZqhrGn2Joo5qawXd2wgue-tfMxUVEp_ph5tLB6Ma_gbou-xRnsEEAX1kOByZVxWwohn8MRQskPbhN_qbFrFZS2GuCBTxB1YVD5NCL7SHWl97lvmIed_e5jwO9n2FSh1LPiyB8FZYoU6rSCCLwtL7WvVMaDWF18Bp2KdLyKOAUkvPx5Yr6BAINF3-mWmdhruugdJlqzD0FVgx9PK7khzMdQLf1x19m9SWD0MSYStTEA/p.png" alt="Livwell 5QT Air Fryer" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="44100"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Air Fryer</div>
+        <div class="pcard-name">Livwell 5QT Smart Touch Air Fryer</div>
+        <div class="pcard-desc">Compact smart air fryer with Touch IQ controls and preset cooking modes.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.9 (20)</div>
+        <div class="pcard-price"><span class="p-now">$89.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 44 viewing now</div>
+    </a>
+
+    <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.05s">
+      <span class="pcard-badge badge-sale">SALE</span>
+      <div class="pcard-img">
+        <img src="https://uc0ce8a89f0ae43de60f869c404a.previews.dropboxusercontent.com/p/thumb/ADALWu88DA4O-akLPeeJnlPpCDncVgePnJfsxmGuq8f7bzXfoBENc5Y7E22H-KbIhboRTZxNbu2jsX6Zxm_0RvzJaBPwNE9wkVNQ5Re8thTRO3jz_Hki9lweKCHdYu0tZGQk7Z_VVf8AqtEZ_hG63slsiVGP4J6LbmqLMJKvgv76N6BGPT8AWCKKJGLMDtMkqDOySL3Bvb02JXTSZcBLtq7OGabPGEmXdtnKOa2l8HW8oZbdBuuLhGYQnPDdKNaq2zmOYJox6I8PGQ8PLdMiAlj9gBVCK17C7KdXYYPJ3VbW6QaKhcHp3rGtrE_RC2JH8vtrRuZofVUbHnlf2a696RZvqsb_09edFEhzPIAnnj1f7Q/p.jpeg" alt="Livwell 7QT Air Fryer" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="39600"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Air Fryer</div>
+        <div class="pcard-name">Livwell 7QT Touch IQ Matte Grey Air Fryer</div>
+        <div class="pcard-desc">Family-sized 7-quart matte grey air fryer. Smart touch display, multiple presets.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.9 (22)</div>
+        <div class="pcard-price"><span class="p-now">$229.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 31 viewing now</div>
+    </a>
+
+    <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.1s">
+      <span class="pcard-badge badge-new">NEW</span>
+      <div class="pcard-img">
+        <img src="https://ucac44891b3fb914539b4f38cab4.previews.dropboxusercontent.com/p/thumb/ADCYLB7k-qhwo9N8E0nz6YimaSTaH66y39_KyyG7FSfW8FS2bD8RwLYllLvTarPGKSTaWnCMlbLbJbampi336--8JSOQFKiPUxBYgAWUus_URhRVrLxsSau-u5QxRhmWgyL7NlMfdTQN_Gq5cwognC4bJLvbUQWfSWLpV4Ch3UZ0yhBhCDm8F8nNy1sc8R253JAga5x0RkOYSvRhNAyvwABqyYpNHBn7CYPwPNvKOYTwxtO70rncYUPaJcsyN30pAcjmH6DIh2CMATY-XSo4KYmaaIv7-vHjCSCkD0pz7OrTkxaVypIdul2gDA61lqqAlUKnEwjpfQ1IHoPV2K08BaC0NggUOQBiYE7y-_B-j1vAnLegeY1kAwfRxyZuJpcWWoJy8mhVaVDBLJzMdZpx8UakRqUwpKAgbc9wXDYiaVt4KwSAJdAt-OR45DOLtI6pCgwhT58kNp7bNl7uzC-_gVvCi6JuEYiD7r_IqdplO43c-oiSA5ctW_yoYYXCkTZLpD5P656F9umToG7kD9FWD87ravsGzTCLG8BFADMybc7COw/p.png" alt="Livwell 6QT Glass Air Fryer" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="35100"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Air Fryer</div>
+        <div class="pcard-name">Livwell 6QT Glass Container Air Fryer</div>
+        <div class="pcard-desc">See-through glass container — monitor your food without opening the lid.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.9 (30)</div>
+        <div class="pcard-price"><span class="p-now">$179.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 58 viewing now</div>
+    </a>
+
+    <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.15s">
+      <div class="pcard-img">
+        <img src="https://uc6069dd841251ae053f9ad390da.previews.dropboxusercontent.com/p/thumb/ADCTKfoe97QOI06i34PyPyyTl7GsFEK-ljfFypq-rGn2tnY8rBjGIpGuFsgyaZYQth2HBTPz4uRBoiHNyLuf143S_PZ8yuRBfttgRwyYpoSqmGO8Yau3nUO_ui1yPcF4MVAR9xQuadQINmgIhjyx9LD6kjcU_FZnUmJ_sGFzWWaTJzUPzlqZ_MNvLVhJ5LYBaQvtHdHzQAAg0Na5U5m-aB5v9HVe4uSNKVGwd8SQr1kh9Ph6UxlCiO0M3SB4juyIpqIJxJZvgCzQSg5dOT6I_bs3EbxmeifJFsN3S_Vsh0hBM2tc1K7-afygdX-avV7PK9LRWz73DR-vLll6Wnkcl7jKpJ1zewKl1Os8WdwMdv4qJw/p.jpeg" alt="Livwell Smart Touch Toaster" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="30600"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Smart Toaster</div>
+        <div class="pcard-name">Livwell Touch IQ 2-Slice Smart Toaster</div>
+        <div class="pcard-desc">Smart touch display toaster with precision browning control and multiple modes.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.9 (24)</div>
+        <div class="pcard-price"><span class="p-now">$149.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 26 viewing now</div>
+    </a>
+
+    <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.2s">
+      <span class="pcard-badge badge-top">TOP PICK</span>
+      <div class="pcard-img">
+        <img src="https://uc92df5649c824d6ee8f6dad7c37.previews.dropboxusercontent.com/p/thumb/ADDg2isk7MXeV7d-Og_0-Twbn3DWxSkXgvS_DvhyfuNz_R64QWNMAfoQFFDX6Bg93nxbvd_09QzvwcrRe3N7zhwUq86rcG-xYf_UVWogjU2MBfXpUVm3yS3bkvNeJk2dHPimmIRyCLgJqXoBgwhMavh9wjwEc9nNN-nGu9JK2PwkDuncFtPIPtym52kBSJRBMozMNqzktJ3YhCa9nZbX_-wqq95wk2tYW-lcLYmoMqdlOUoacudlNr42LlD_oKLXHvPxyjT4LSYoS8Qvd1PuGC5meGHrSIjI-I5Gh7plCmDiDK9f9mDQS7g73d23I43en-GZoDx2VzBUcNE2hIf9U-Bryw_I0ykYgnptSGzOxI-38zyAl-gmxw51_ZT_hGB22kQ27PCT8o6ab61CiyUdu1aVb-tCSadEX8J4NVTGI1yi4Q/p.png" alt="Pizza Oven" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="26100"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Pizza Oven</div>
+        <div class="pcard-name">Livwell Touch IQ Indoor/Outdoor Pizza Oven</div>
+        <div class="pcard-desc">Air fry, bake &amp; make pizza — indoors or outdoors. Ultimate versatile appliance.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.9 (25)</div>
+        <div class="pcard-price"><span class="p-now">$399.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 73 viewing now</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ HOME APPLIANCES ══ -->
+<section class="section cat-home" id="home">
+  <div class="sec-hd reveal">
+    <div>
+      <div class="sec-label">🏠 Home Appliances</div>
+      <h2 class="sec-title">Smarter Living, Every Day.</h2>
+    </div>
+    <a href="https://hong-kong-time100-co-limited.kckb.me/z3d" target="_blank" rel="noopener" class="sec-link">View All →</a>
+  </div>
+
+  <div class="feat-card reveal" style="margin-bottom:24px">
+    <div class="feat-img">
+      <img src="https://www.magomaga.com/cdn/shop/files/image_272.png?v=1778304874&width=1100" alt="Roma Pro V1.5" />
+    </div>
+    <div class="feat-body">
+      <div class="feat-badge">⭐ Editor's Top Pick</div>
+      <div class="feat-title">Roma Pro V1.5<br>Smart Coffee Roaster</div>
+      <div class="feat-desc">Craft your perfect roast at home — app-controlled precision roasting for real coffee lovers.</div>
+      <div class="feat-features">
+        <div class="feat-feature">App-controlled precision roast profiles</div>
+        <div class="feat-feature">Summer Sale — Save $40 off retail price</div>
+        <div class="feat-feature">Ships worldwide · Fast delivery</div>
+      </div>
+      <div class="feat-price">
+        <span class="pnow">$440</span>
+        <span class="pwas">$480</span>
+        <span class="psave">Save $40</span>
+      </div>
+      <a href="https://hong-kong-time100-co-limited.kckb.me/z3d" target="_blank" rel="noopener" class="feat-cta">🛒 Get This Deal →</a>
+    </div>
+  </div>
+
+  <div class="grid-4">
+    <a href="https://mosslab.kckb.st/z3d" target="_blank" rel="noopener" class="pcard reveal">
+      <span class="pcard-badge badge-new">27% OFF</span>
+      <div class="pcard-img">
+        <img src="https://mosslab.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e13bcd0-9d90-4548-b9c6-d1332f56738c%2Feeef0904-96c5-4cfe-8706-e7bb1d09a98c%2F%25EB%25B3%25B4%25EC%25A0%2595%25EB%25B3%25B8_00004_copy.jpg?table=block&id=ff9e3b54-7445-48ad-987f-e3672a17206d&spaceId=6e13bcd0-9d90-4548-b9c6-d1332f56738c&width=1420&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl" alt="Moss Air" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="41200"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Air &amp; Wellness</div>
+        <div class="pcard-name">Moss Air Living Humidifier</div>
+        <div class="pcard-desc">Real living moss that purifies and humidifies. Nature, engineered for your desk.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.7 (312)</div>
+        <div class="pcard-price"><span class="p-now">$89</span><span class="p-was">$122</span><span class="p-save">Save $33</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 31 viewing now</div>
+    </a>
+
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.06s">
+      <span class="pcard-badge badge-hot">HOT</span>
+      <div class="pcard-img">
+        <img src="https://cdn.shopify.com/s/files/1/0977/5310/4679/files/ID_-2.png?v=1779983317" alt="GoveeLife Ice Maker Pro" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="35800"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Kitchen</div>
+        <div class="pcard-name">GoveeLife Smart Nugget Ice Maker Pro</div>
+        <div class="pcard-desc">Soft chewable nugget ice on demand. App-controlled, self-cleaning.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.9 (24)</div>
+        <div class="pcard-price"><span class="p-now">$499.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 67 viewing now</div>
+    </a>
+
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.12s">
+      <span class="pcard-badge badge-sale">Amazon Pick</span>
+      <div class="pcard-img">
+        <img src="https://cdn.shopify.com/s/files/1/0977/5310/4679/files/H7105-PP_-1_1.jpg?v=1773376152" alt="GoveeLife Tower Fan" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="29400"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Cooling &amp; Comfort</div>
+        <div class="pcard-name">GoveeLife 42" Smart Tower Fan 2 Max</div>
+        <div class="pcard-desc">Ultra-quiet with app &amp; voice control, sleep mode, 90° oscillation.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.6 (807)</div>
+        <div class="pcard-price"><span class="p-now">$179.99</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 38 viewing now</div>
+    </a>
+
+    <a href="https://hong-kong-time100-co-limited.kckb.me/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.18s">
+      <span class="pcard-badge badge-top">Summer Sale</span>
+      <div class="pcard-img">
+        <img src="https://www.magomaga.com/cdn/shop/files/image_272.png?v=1778304874&width=1100" alt="Roma Pro V1.5" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="43200"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Smart Coffee</div>
+        <div class="pcard-name">Roma Pro V1.5 Coffee Roaster</div>
+        <div class="pcard-desc">Smart home coffee bean roaster. App-controlled precision, right on your counter.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.8 (2.4k+)</div>
+        <div class="pcard-price"><span class="p-now">$440</span><span class="p-was">$480</span><span class="p-save">Save $40</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 54 viewing now</div>
+    </a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-row">
+    <div class="trust-item"><span class="trust-icon">✈️</span><div class="trust-text"><strong>Free Worldwide Shipping</strong><span>On eligible orders</span></div></div>
+    <div class="trust-item"><span class="trust-icon">🛡️</span><div class="trust-text"><strong>Official Warranties</strong><span>Up to 5 years on storage</span></div></div>
+    <div class="trust-item"><span class="trust-icon">💬</span><div class="trust-text"><strong>24/7 Support</strong><span>Live chat on all stores</span></div></div>
+    <div class="trust-item"><span class="trust-icon">🔒</span><div class="trust-text"><strong>Secure Checkout</strong><span>100% safe payments</span></div></div>
+    <div class="trust-item"><span class="trust-icon">🎁</span><div class="trust-text"><strong>New User Discount</strong><span>Use code <strong style="color:var(--cyan)">move10</strong> for $10 off</span></div></div>
+  </div>
+</div>
+
+<!-- ══ GADGETS ══ -->
+<section class="section cat-gadget" id="gadgets">
+  <div class="sec-hd reveal">
+    <div>
+      <div class="sec-label">⚡ Gadgets &amp; Storage</div>
+      <h2 class="sec-title">Move Faster. Store Smarter.</h2>
+    </div>
+    <a href="https://movespeedttech.kckb.me/z3d" target="_blank" rel="noopener" class="sec-link">View All →</a>
+  </div>
+
+  <div class="grid-4">
+    <a href="https://movespeedttech.kckb.me/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal">
+      <span class="pcard-badge badge-sale">On Sale</span>
+      <div class="pcard-img">
+        <img src="https://movespeed.com/cdn/shop/files/movespeed-seeu-su10-smart-ssd-1090mbs.png?v=1768271826&width=500" alt="SeeU SU10" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="42300"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Flash Drive</div>
+        <div class="pcard-name">MOVESPEED SeeU SU10 Smart Display 128GB–2TB</div>
+        <div class="pcard-desc">1090MB/s, USB 3.2 Gen2, smart display with dual ports. The flash drive of the future.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.8 (41)</div>
+        <div class="pcard-price"><span class="p-now">$99.98</span><span class="p-was">$129.98</span><span class="p-save">Save $30</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 63 viewing now</div>
+    </a>
+
+    <a href="https://movespeedttech.kckb.me/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.06s">
+      <span class="pcard-badge badge-sale">On Sale</span>
+      <div class="pcard-img">
+        <img src="https://movespeed.com/cdn/shop/files/z70pro_a605d29a-f069-4025-b59b-a7ec347af005.png?v=1767664671&width=500" alt="Z70 Pro Max" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="38100"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Power Bank</div>
+        <div class="pcard-name">MOVESPEED Z70 Pro Max 70000mAh 145W</div>
+        <div class="pcard-desc">Professional outdoor power bank — massive capacity, ultra-fast 145W charging.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.7 (230)</div>
+        <div class="pcard-price"><span class="p-now">$59.99</span><span class="p-was">$159.99</span><span class="p-save">Save $100</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 91 viewing now</div>
+    </a>
+
+    <a href="https://movespeedttech.kckb.me/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.12s">
+      <span class="pcard-badge badge-sale">On Sale</span>
+      <div class="pcard-img">
+        <img src="https://movespeed.com/cdn/shop/files/9d3dd3235026f9acd27e536a1c764088.png?v=1748930409&width=500" alt="WD10" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="33600"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Flash Drive</div>
+        <div class="pcard-name">MOVESPEED WD10 128GB–2TB 1000MB/s</div>
+        <div class="pcard-desc">Dual interface push-pull solid state flash drive. USB 3.2 Gen2 speed.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.8 (144)</div>
+        <div class="pcard-price"><span class="p-now">$79.99</span><span class="p-was">$99.99</span><span class="p-save">Save $20</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 47 viewing now</div>
+    </a>
+
+    <a href="https://movespeedttech.kckb.me/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.18s">
+      <span class="pcard-badge badge-hot">HOT</span>
+      <div class="pcard-img">
+        <img src="https://movespeed.com/cdn/shop/files/SP20.png" alt="SP20" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Ends in</span><strong class="cd" data-s="29100"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Flash Drive</div>
+        <div class="pcard-name">MOVESPEED SP20 256GB–2TB 2100MB/s</div>
+        <div class="pcard-desc">Ultra-speed push-pull SSD flash drive — the fastest in the lineup.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.8 (40)</div>
+        <div class="pcard-price"><span class="p-now">$89.99</span><span class="p-was">$113.99</span><span class="p-save">Save $24</span></div>
+        <div class="pcard-btn">🛒 Add to Cart →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 42 viewing now</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ WELLNESS ══ -->
+<section class="section cat-wellness" id="wellness">
+  <div class="sec-hd reveal">
+    <div>
+      <div class="sec-label">🌿 Air &amp; Wellness</div>
+      <h2 class="sec-title">Breathe Better. Feel Calmer.</h2>
+    </div>
+    <a href="https://mosslab.kckb.st/z3d" target="_blank" rel="noopener" class="sec-link">View All →</a>
+  </div>
+
+  <div class="grid-3">
+    <a href="https://mosslab.kckb.st/z3d" target="_blank" rel="noopener" class="pcard reveal">
+      <span class="pcard-badge badge-new">27% OFF</span>
+      <div class="pcard-img">
+        <img src="https://mosslab.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e13bcd0-9d90-4548-b9c6-d1332f56738c%2Fdc9fb89d-c924-4579-9db2-aa455e83fbe8%2F0T6A4593.jpg?table=block&id=4845482b-3384-412c-ae5e-5accbf4718fd&spaceId=6e13bcd0-9d90-4548-b9c6-d1332f56738c&width=1420&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl" alt="Moss Air" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Deal ends in</span><strong class="cd" data-s="38400"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Living Humidifier</div>
+        <div class="pcard-name">Moss Air — The Living Moss Humidifier</div>
+        <div class="pcard-desc">Real preserved moss humidifies and purifies. Drought tolerant, self-watering, whisper quiet. The world's first biophilic humidifier.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.7 (312 reviews)</div>
+        <div class="pcard-price"><span class="p-now">$89</span><span class="p-was">$122</span><span class="p-save">Save $33</span></div>
+        <div class="pcard-btn">🛒 Get Moss Air →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 47 viewing now</div>
+    </a>
+
+    <a href="https://mosslab.kckb.st/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.08s">
+      <span class="pcard-badge badge-new">NEW</span>
+      <div class="pcard-img">
+        <img src="https://mosslab.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e13bcd0-9d90-4548-b9c6-d1332f56738c%2F66fefd77-4070-400d-aeee-3f7b6817dba8%2Fmoss_air_7.jpg?table=block&id=80d8c995-4ce4-4383-b388-972599427793&spaceId=6e13bcd0-9d90-4548-b9c6-d1332f56738c&width=1420&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl" alt="Moss Filter" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Deal ends in</span><strong class="cd" data-s="31200"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Filter · Moss Air</div>
+        <div class="pcard-name">Moss Filter — Natural Humidification</div>
+        <div class="pcard-desc">Living moss filter for pure, organic humidification. The essence of a forest, distilled for your space.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.8 (198 reviews)</div>
+        <div class="pcard-price"><span class="p-now">$89</span><span class="p-was">$122</span><span class="p-save">27% OFF</span></div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 29 viewing now</div>
+    </a>
+
+    <a href="https://mosslab.kckb.st/z3d" target="_blank" rel="noopener" class="pcard reveal" style="transition-delay:0.16s">
+      <span class="pcard-badge badge-top">CALM</span>
+      <div class="pcard-img">
+        <img src="https://mosslab.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6e13bcd0-9d90-4548-b9c6-d1332f56738c%2F5bb04fdf-8939-43e0-a99b-cb657ac6fb4e%2FPOH_1524.jpg?table=block&id=53aaab77-250d-4f19-953d-d5ee618bfe86&spaceId=6e13bcd0-9d90-4548-b9c6-d1332f56738c&width=1420&userId=&cache=v2&imgBuildSrc=requestProxiedImageUrl" alt="Aroma Stone" />
+      </div>
+      <div class="pcard-timer"><span>⏱ Deal ends in</span><strong class="cd" data-s="24000"></strong></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Filter · Moss Air</div>
+        <div class="pcard-name">Aroma Stone Filter — Scent &amp; Calm</div>
+        <div class="pcard-desc">Add your favorite essential oils for a subtle, personalised scent experience. Calm on your terms.</div>
+        <div class="pcard-stars"><span class="stars-y">★★★★★</span> 4.6 (87 reviews)</div>
+        <div class="pcard-price"><span class="p-now">$89</span><span class="p-was">$122</span><span class="p-save">27% OFF</span></div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 22 viewing now</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ LIGHTING ══ -->
+<section class="section cat-lighting" id="lighting">
+  <div class="sec-hd reveal">
+    <div>
+      <div class="sec-label">💡 Smart Lighting</div>
+      <h2 class="sec-title">Light Up Every Space.</h2>
+    </div>
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="sec-link">View All →</a>
+  </div>
+
+  <div class="grid-5">
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal">
+      <span class="pcard-badge badge-new">NEW</span>
+      <div class="pcard-img"><img src="https://cdn.shopify.com/s/files/1/0512/3489/8105/files/H606A_b44570d1-7090-49bd-83c6-d50f13a50ed6.png?v=1769151372" alt="H606A Strip" /></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Strip Lights</div>
+        <div class="pcard-name">Govee RGBIC Strip Light H606A</div>
+        <div class="pcard-desc">Multi-color segmented, independent control. Perfect for desks &amp; shelving.</div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 35 viewing now</div>
+    </a>
+
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.05s">
+      <div class="pcard-img"><img src="https://cdn.shopify.com/s/files/1/0512/3489/8105/files/banner-p_a800bba3-a569-4cd4-8695-ed82bf87cefa.jpg?v=1713954534&width=1000&height=1412&crop=center" alt="Govee Ambient" /></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Ambient Lighting</div>
+        <div class="pcard-name">Govee Smart Ambient Kit</div>
+        <div class="pcard-desc">Immersive ambient lighting that syncs to your space and mood.</div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 28 viewing now</div>
+    </a>
+
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.1s">
+      <div class="pcard-img"><img src="https://cdn.shopify.com/s/files/1/0512/3489/8105/files/2A40_1.5x_d07f7868-6127-4271-9185-bc7bec3f74cf.png?v=1778731036&width=800&height=800&crop=center" alt="Govee Bulb 2A40" /></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Smart Bulbs</div>
+        <div class="pcard-name">Govee Smart Bulb 2A40</div>
+        <div class="pcard-desc">Full-color with app &amp; voice control. Instant ambiance for any fixture.</div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 19 viewing now</div>
+    </a>
+
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.15s">
+      <span class="pcard-badge badge-hot">HOT</span>
+      <div class="pcard-img"><img src="https://cdn.shopify.com/s/files/1/0512/3489/8105/files/6063_e0988535-2077-41d3-86c9-a486c9e6523c.png?v=1768205922" alt="Govee Hexa Panels" /></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Light Panels</div>
+        <div class="pcard-name">Govee Glide Hexa Panels</div>
+        <div class="pcard-desc">Modular hexagonal LED panels — build any pattern, stunning wall art.</div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 52 viewing now</div>
+    </a>
+
+    <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener" class="pcard contain-img reveal" style="transition-delay:0.2s">
+      <div class="pcard-img"><img src="https://cdn.shopify.com/s/files/1/0512/3489/8105/files/H61D5_Free_6ff4fb1b-1098-4c8a-afb9-47691d80552a.png?v=1768792394&width=800&height=800&crop=center" alt="Govee Floor Lamp H61D5" /></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Floor Lamps</div>
+        <div class="pcard-name">Govee RGBIC Floor Lamp H61D5</div>
+        <div class="pcard-desc">Free-standing RGBIC floor lamp. Corner ambiance for any room.</div>
+        <div class="pcard-btn">🛒 Shop Now →</div>
+      </div>
+      <div class="pcard-viewed"><span class="vdot"></span> 41 viewing now</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="data:image/jpeg;base64,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" alt="BestFinds.xyz" />
+        <span>BestFinds<span style="color:var(--muted);font-size:13px">.xyz</span></span>
+      </div>
+      <div class="footer-tagline">Curated finds across every category — home, gadgets, wellness, and lighting. Updated regularly, hand-picked with care.</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://smoqex-all-in-one-indoor-pellet-smoker.kckb.me/z3d" target="_blank" rel="noopener">🍳 Kitchen Appliances</a>
+      <a href="https://hong-kong-time100-co-limited.kckb.me/z3d" target="_blank" rel="noopener">🏠 Home Appliances</a>
+      <a href="https://movespeedttech.kckb.me/z3d" target="_blank" rel="noopener">⚡ Gadgets &amp; Storage</a>
+      <a href="https://mosslab.kckb.st/z3d" target="_blank" rel="noopener">🌿 Air &amp; Wellness</a>
+      <a href="https://govee.sjv.io/z3d" target="_blank" rel="noopener">💡 Smart Lighting</a>
+      <a href="https://zeein.github.io/your-home-solutions/" target="_blank" rel="noopener">Your Home Solutions</a>
+      <a href="https://zeein.github.io/your-gadgets-solutions/" target="_blank" rel="noopener">Your Gadgets Solutions</a>
+      <a href="https://zeein.github.io/mosslab-air-purifier/" target="_blank" rel="noopener">Moss Air</a>
+      <a href="https://zeein.github.io/best-finds/" target="_blank" rel="noopener">Zeein Best Finds</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-disc">This site contains affiliate links. When you click and purchase, we may earn a small commission at no extra cost to you. All product names and images belong to their respective brands.</div>
+    <div class="footer-copy">© 2020–2025 BestFinds.xyz · All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// ── COUNTDOWN ──
+function fmt(s){ const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sc=s%60; return[h,m,sc].map(v=>String(v).padStart(2,'0')).join(':'); }
+document.querySelectorAll('.cd').forEach(el=>{
+  let s=parseInt(el.dataset.s)||14400;
+  el.textContent=fmt(s);
+  setInterval(()=>{ if(s>0)s--; el.textContent=fmt(s); },1000);
+});
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('on'),i*60); obs.unobserve(e.target); } });
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── VIEWER FLUCTUATION ──
+setInterval(()=>{
+  document.querySelectorAll('.pcard-viewed').forEach(el=>{
+    const m=el.textContent.match(/(\d+)/);
+    if(m){ const n=Math.max(8,parseInt(m[1])+(Math.random()>0.5?1:-1)); el.querySelector('.vdot').nextSibling.textContent=` ${n} viewing now`; }
+  });
+},8000);
+
+// ── CART FEEDBACK ──
+document.querySelectorAll('.pcard-btn, .feat-cta').forEach(btn=>{
+  btn.addEventListener('click',function(e){
+    if(this.tagName==='DIV'){
+      const orig=this.innerHTML;
+      this.innerHTML='✓ Added!';
+      this.style.background='var(--green)';
+      this.style.color='#0f0f10';
+      setTimeout(()=>{ this.innerHTML=orig; this.style.background=''; this.style.color=''; },1600);
+    }
+  });
+});
+
+// ── ACTIVITY BUBBLES ──
+const acts = [
+  {icon:'🍳',name:'Maria C.',  act:'just ordered',   prod:'Livwell 7QT Touch IQ Air Fryer',      loc:'🇺🇸 Florida',   t:'just now'},
+  {icon:'⚡',name:'Tyler K.',  act:'grabbed',         prod:'MOVESPEED SP20 2TB',                  loc:'🇺🇸 Texas',     t:'1 min ago'},
+  {icon:'🌿',name:'Haruki M.', act:'added to cart',  prod:'Moss Air Humidifier',                 loc:'🇯🇵 Tokyo',     t:'2 min ago'},
+  {icon:'💡',name:'Laila A.',  act:'purchased',       prod:'Govee Hexa Light Panels',             loc:'🇦🇪 Dubai',     t:'just now'},
+  {icon:'🍳',name:'Sarah W.',  act:'checked out',    prod:'Livwell Glass 6QT Air Fryer',          loc:'🇦🇺 Sydney',    t:'3 min ago'},
+  {icon:'⚡',name:'Priya K.',  act:'bought',          prod:'MOVESPEED Z70 Pro Max',               loc:'🇸🇬 Singapore', t:'2 min ago'},
+  {icon:'🍳',name:'James L.',  act:'ordered',         prod:'Livwell Smart Touch Toaster',         loc:'🇺🇸 Chicago',   t:'just now'},
+  {icon:'💡',name:'Marcus L.', act:'got a deal on',  prod:'Govee Strip Lights H606A',            loc:'🇬🇧 London',    t:'4 min ago'},
+  {icon:'⚡',name:'Kenji T.',  act:'scored',          prod:'SeeU SU10 2TB Drive',                 loc:'🇯🇵 Osaka',     t:'just now'},
+  {icon:'🌿',name:'Yusuf A.',  act:'loves',           prod:'Moss Air — 5-star review',            loc:'🇹🇷 Istanbul',  t:'5 min ago'},
+  {icon:'🍳',name:'Sofia R.',  act:'added',           prod:'Livwell 5QT Smart Air Fryer',         loc:'🇩🇪 Berlin',    t:'2 min ago'},
+];
+const bc=document.getElementById('bubbles');
+let bi=0,bact=[];
+function showBubble(){
+  const d=acts[bi%acts.length]; bi++;
+  const el=document.createElement('div'); el.className='bubble';
+  el.innerHTML=`<div class="b-av">${d.icon}</div><div><div class="b-name">${d.name} ${d.act} <strong style="color:var(--accent)">${d.prod}</strong></div><div class="b-sub">${d.loc} · ${d.t}</div></div>`;
+  if(bact.length>=2){ const old=bact.shift(); old.classList.add('out'); setTimeout(()=>old.remove(),360); }
+  bc.appendChild(el); bact.push(el);
+  setTimeout(()=>{ el.classList.add('out'); setTimeout(()=>{ el.remove(); bact=bact.filter(b=>b!==el); },360); },5000);
+}
+setTimeout(()=>{ showBubble(); function nx(){ setTimeout(()=>{showBubble();nx();},4000+Math.random()*3500); } nx(); },2000);
+</script>
+</body>
+</html>
