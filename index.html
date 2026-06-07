@@ -411,6 +411,148 @@ footer {
 .cat-gadget .sec-title  { color: #93c5fd; }
 .cat-wellness .sec-title{ color: #86efac; }
 .cat-lighting .sec-title{ color: #fde68a; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET (max 900px)
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 12px 20px; }
+  .nav-search { display: none; }
+  .nav-cats a { padding: 6px 10px; font-size: 13px; }
+
+  .hero-strip { grid-template-columns: 1fr; max-height: none; min-height: auto; }
+  .hero-img-panel { display: none; }
+  .hero-inner { padding: 40px 24px; min-height: 340px; }
+
+  .section { padding: 48px 20px; }
+
+  .feat-card { grid-template-columns: 1fr; }
+  .feat-img img { aspect-ratio: 16/9; }
+  .feat-body { padding: 28px 24px; }
+
+  .grid-5 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+
+  .trust { padding: 20px 20px; }
+  .trust-row { gap: 20px; }
+
+  footer { padding: 40px 20px 24px; }
+  .footer-top { flex-direction: column; gap: 28px; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE (max 600px)
+══════════════════════════════════════ */
+@media (max-width: 600px) {
+  /* NAV — logo + hamburger only, hide cats */
+  nav {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+  .nav-cats { display: none; }
+  .nav-search { display: none; }
+  .nav-logo { font-size: 16px; }
+  .nav-logo img { height: 30px; width: 30px; }
+
+  /* HERO — single column, compact */
+  .hero-strip {
+    margin-top: 56px;
+    grid-template-columns: 1fr;
+    max-height: none;
+    min-height: auto;
+    height: auto;
+  }
+  .hero-img-panel { display: none; }
+  .hero-inner {
+    padding: 32px 20px 36px;
+    min-height: 0;
+  }
+  .hero-h1 { font-size: 1.75rem; margin-bottom: 12px; }
+  .hero-sub { font-size: 14px; margin-bottom: 20px; }
+  .cat-pills { gap: 6px; }
+  .cat-pill { font-size: 12px; padding: 5px 12px; }
+
+  /* SECTIONS */
+  .section { padding: 36px 16px; }
+  .sec-hd { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+  .sec-title { font-size: 1.4rem; }
+  .sec-link { font-size: 13px; padding: 7px 16px; }
+
+  /* FEATURED CARD — stack vertically */
+  .feat-card {
+    grid-template-columns: 1fr;
+  }
+  .feat-img { max-height: 220px; overflow: hidden; }
+  .feat-img img {
+    width: 100%; height: 220px;
+    object-fit: cover; aspect-ratio: unset;
+  }
+  .feat-body {
+    padding: 20px 18px;
+    gap: 12px;
+  }
+  .feat-title { font-size: 1.2rem; }
+  .feat-desc { font-size: 14px; }
+  .feat-cta { width: 100%; justify-content: center; padding: 13px 20px; font-size: 14px; }
+
+  /* PRODUCT GRIDS — 2 columns */
+  .grid-5 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+  /* PRODUCT CARD */
+  .pcard-img { aspect-ratio: 1; }
+  .pcard-body { padding: 12px 12px 10px; gap: 5px; }
+  .pcard-name { font-size: 13px; }
+  .pcard-desc { font-size: 12px; }
+  .pcard-cat { font-size: 10px; }
+  .pcard-btn { margin: 8px 12px 12px; font-size: 12px; padding: 9px 0; }
+  .pcard-timer { font-size: 11px; padding: 5px 12px; }
+  .pcard-viewed { font-size: 10px; padding: 5px 12px 8px; }
+  .pcard-badge { font-size: 10px; padding: 3px 8px; top: 8px; left: 8px; }
+  .p-now { font-size: 0.95rem; }
+
+  /* TRUST BAR */
+  .trust { padding: 18px 16px; }
+  .trust-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .trust-item { gap: 8px; }
+  .trust-icon { font-size: 18px; }
+  .trust-text strong { font-size: 12px; }
+  .trust-text span { font-size: 11px; }
+
+  /* FOOTER */
+  footer { padding: 32px 16px 20px; }
+  .footer-top { flex-direction: column; gap: 24px; }
+  .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+  .footer-disc { font-size: 11px; }
+  .footer-copy { font-size: 11px; }
+
+  /* BUBBLES — smaller on mobile */
+  #bubbles { bottom: 12px; left: 12px; max-width: calc(100vw - 24px); }
+  .bubble { padding: 9px 12px; gap: 9px; border-radius: 12px; }
+  .b-av { width: 30px; height: 30px; font-size: 14px; }
+  .b-name { font-size: 12px; }
+  .b-sub { font-size: 10px; }
+
+  /* MARQUEE */
+  .mq-track span { padding: 0 20px; font-size: 11px; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (max 380px)
+══════════════════════════════════════ */
+@media (max-width: 380px) {
+  .grid-5,
+  .grid-4,
+  .grid-3 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hero-h1 { font-size: 1.5rem; }
+  .trust-row { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -688,7 +830,7 @@ footer {
     <div class="trust-item"><span class="trust-icon">🛡️</span><div class="trust-text"><strong>Official Warranties</strong><span>Up to 5 years on storage</span></div></div>
     <div class="trust-item"><span class="trust-icon">💬</span><div class="trust-text"><strong>24/7 Support</strong><span>Live chat on all stores</span></div></div>
     <div class="trust-item"><span class="trust-icon">🔒</span><div class="trust-text"><strong>Secure Checkout</strong><span>100% safe payments</span></div></div>
-    <div class="trust-item"><span class="trust-icon">🎁</span><div class="trust-text"><strong>New User Discount</strong><span>Use code <strong style="color:var(--cyan)">z3d</strong> for $10 off</span></div></div>
+    <div class="trust-item"><span class="trust-icon">🎁</span><div class="trust-text"><strong>New User Discount</strong><span>Use code <strong style="color:var(--cyan)">move10</strong> for $10 off</span></div></div>
   </div>
 </div>
 
